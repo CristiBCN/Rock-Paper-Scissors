@@ -60,12 +60,69 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+
+function playGame() {
+  return new Promise((resolve, reject) => {
+    let playerWins = 0;
+    let computerWins = 0;
+    let tie = 0;
+
+    for (let count = 0; count < 3; count++) {
+      setTimeout(function() {
+        const playerSelection = PascalCase(getPlayerOption());
+        console.log(playerSelection);
+        const computerSelection = getComputerChoice();
+        console.log(computerSelection);
+
+        const round = playRound(playerSelection, computerSelection);
+        let show = document.getElementById("play");
+
+        show.textContent = show.textContent + `Round ${count + 1}: ${round}\n\n`; // Displaying the result of each round
+        show.style.whiteSpace = "pre";
+
+        if (you === "Win") {
+          playerWins++;
+        } else if (you === "Lose") {
+          computerWins++;
+        } else {
+          tie++;
+        }
+
+        console.log(you);
+      }, 1000 * count);
+    }
+
+    setTimeout(function() {
+      console.log(playerWins);
+      console.log(computerWins);
+      console.log(tie);
+
+      if (playerWins === computerWins) {
+        resolve(`Tie! The score is ${playerWins} to ${computerWins}`);
+      } else if (playerWins > computerWins) {
+        resolve(`You Win! The score is ${playerWins} to ${computerWins}`);
+      } else {
+        resolve(`You Lose! The score is ${playerWins} to ${computerWins}`);
+      }
+    }, 1000 * 3);
+  });
+}
+
+function handler() {
+  playGame().then(result => {
+    let score = document.getElementById("score");
+    score.textContent = result;
+  });
+}
+
+/*
 function playGame() {
   let playerWins = 0;
   let computerWins = 0;
   let tie = 0;
   
   for (let count = 0; count < 3; count++) {
+    setTimeout(function() {
     const playerSelection = PascalCase(getPlayerOption());
     console.log(playerSelection);
     const computerSelection = getComputerChoice();
@@ -74,31 +131,35 @@ function playGame() {
     const round = playRound(playerSelection, computerSelection);
 
     let show = document.getElementById("play");      
-      show.textContent = show.textContent + round + '\n' + '\n';
-      show.style.whiteSpace = "pre";
+    show.textContent = show.textContent + `Round ${count + 1}: ${round}\n\n`; // Displaying the result of each round
+    show.style.whiteSpace = "pre";
       
     if (you === "Win") {
-      playerWins = ++playerWins;
+      playerWins++;
     } else if (you === "Lose") {
-      computerWins = ++computerWins;
-    } else tie = ++tie; 
+      computerWins++;
+    } else {
+      tie++;
+    } 
 
-    
-      
     console.log(you);
+  }, 1000 * count);
   }
-
+  setTimeout(function() {
   console.log(playerWins);
   console.log(computerWins);
   console.log(tie);
   
   if (playerWins === computerWins) {
-    return `Tie! The score is ${playerWins} to ${computerWins}`
+    return `Tie! The score is ${playerWins} to ${computerWins}`;
   } else if (playerWins > computerWins) {
-    return `You Win! The score is ${playerWins} to ${computerWins}`
-  } else return `You Lose! The score is ${playerWins} to ${computerWins}`
-    
+    return `You Win! The score is ${playerWins} to ${computerWins}`;
+  } else {
+    return `You Lose! The score is ${playerWins} to ${computerWins}`;
+  }
+}, 1000 * 3);
 }
+
 
 let score = document.getElementById("score");
 
@@ -106,3 +167,4 @@ function handler() {
   score.textContent = playGame();
 }
 
+*/
