@@ -98,11 +98,11 @@ function playGame() {
   }
 
   if (playerWins === computerWins) {
-    score = `Tie! The score is ${playerWins} to ${computerWins}`;
+    score = `Tie! This game's score is ${playerWins} to ${computerWins}`;
   } else if (playerWins > computerWins) {
-    score = `You Win! The score is ${playerWins} to ${computerWins}`;
+    score = `You Win! This game's score is ${playerWins} to ${computerWins}`;
   } else {
-    score = `You Lose! The score is ${playerWins} to ${computerWins}`;
+    score = `You Lose! This game's score is ${playerWins} to ${computerWins}`;
   }
 
   let scoreDisplay = document.getElementById("score");
